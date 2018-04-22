@@ -10,7 +10,7 @@ public class Network : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         NetworkManager manager = GetComponent<NetworkManager>();
-        manager.StartServer();
+        manager.StartHost();
     }
 	
 	// Update is called once per frame

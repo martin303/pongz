@@ -1,73 +1,44 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Bouncy_ball : MonoBehaviour
 {
-    //float horizontal;
-    //float vertical;
-    //float speed;
-
-    //private void start()
-    //{
-    //    speed = 1;
-    //}
-
-
-    //update is called once per frame
-    //void fixedupdate()
-    //{
-    //    horizontal = input.getaxis("horizontal");
-    //    vertical = input.getaxis("vertical");
-
-
-    //    check should cause sliding.
-    //    if (horizontal != 0 || vertical != 0)
-    //    {
-    //        vector2 movement = new vector2(horizontal, vertical) * speed;
-    //        getcomponent<transform>().position = new vector3(movement.x, movement.y, transform.position.z);
-    //    }
-    //}
-
+    public Text textScore;
+    public Text textScore2;
+    new AudioSource audio;
     float thrust = 500;
     private Rigidbody2D rb;
-    private int playerOneScore;
+
 
     void Start()
     {
-
         rb = GetComponent<Rigidbody2D>();
         rb.AddForce(transform.up * thrust);
         rb.AddForce(transform.right * thrust);
-       // Debug.Log("StartHAHAHAA");
-
-
+        audio = GetComponent<AudioSource>();
     }
-
-    void FixedUpdate()
+    
+  
+    void Update()
     {
-
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("OnTriggerEnter");
-    }
-
-
-    void OnCollisionEnter2D(Collision2D col)
-    {
-    //    if (col.transform.position.x >= 0 && col.transform.posit) {
-        if (transform.position.x > 10) {
-            Debug.Log("X: 12 hit");
-            playerOneScore++;
-        }
-
-    //    Debug.Log("OnCollish");
-        if (col.gameObject.name == "OuterSquare")
+        //check if x speed is to low and double
+       
+        if (rb.velocity.x <= 4 && rb.velocity.x >= -4)
         {
-     //       Debug.Log("OuterSwwuar");
+            rb.velocity = new Vector2(rb.velocity.x*2, rb.velocity.y);
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.name == "PlayerOne" || collision.gameObject.name == "PlayerTwo")
+        {
+            audio.Play();
+        }
+    }
+
 }
 
