@@ -8,9 +8,7 @@ public class Bouncy_ball : MonoBehaviour
 {
     public Text textScore;
     public Text textScore2;
-
-
-    AudioSource audio;
+    new AudioSource audio;
     float thrust = 500;
     private Rigidbody2D rb;
 
@@ -30,9 +28,7 @@ public class Bouncy_ball : MonoBehaviour
        
         if (rb.velocity.x <= 4 && rb.velocity.x >= -4)
         {
-            Debug.Log("OLD x speed:" + rb.velocity.x);
             rb.velocity = new Vector2(rb.velocity.x*2, rb.velocity.y);
-            Debug.Log("NEW x Speed: " + rb.velocity.x);
         }
     }
 
