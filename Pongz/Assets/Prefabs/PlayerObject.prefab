@@ -86,7 +86,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 1305832283990252, guid: cefd07bd3f8a57949bd7c0f9e399c787,
     type: 2}
-  ballPrefab: {fileID: 1512693758963836, guid: 03b61d2cac1ca6f44a36a9fcfb7bc143, type: 2}
   spawnPos1: {fileID: 4754816386468290, guid: c7ee474c04fe13347b15df77de82325e, type: 2}
   spawnPos2: {fileID: 4862341354148102, guid: 4b0c66f1f11f9064497c1693fe310451, type: 2}
-  nrOfClients: 0

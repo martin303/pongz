@@ -28,16 +28,44 @@ public class Bouncy_ball : NetworkBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x * 2, rb.velocity.y);
         }
+        if (!hasAuthority)
+        {
+            RpcUpdatePos(rb.position, rb.velocity);
+        }
+        CmdUpdatePos(rb.position, rb.velocity);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.name == "PlayerOne" || collision.gameObject.name == "PlayerTwo")
         {
-            audio = collision.gameObject.GetComponent<AudioSource>();
+            audio = gameObject.GetComponent<AudioSource>();
             audio.Play();
         }
     }
+
+    [Command]
+    void CmdUpdatePos(Vector3 pos, Vector3 velocity)
+    {
+        rb = GetComponent<Rigidbody2D>();
+        rb.velocity = (velocity);
+        gameObject.transform.position = pos;
+    }
+
+    [ClientRpc]
+    void RpcUpdatePos(Vector3 pos, Vector3 velocity)
+    {
+        if (!hasAuthority)
+        {
+        rb = GetComponent<Rigidbody2D>();
+        rb.velocity = (velocity);
+        gameObject.transform.position = pos;
+        }   
+
+    }
+
+
+
 
 }
 
