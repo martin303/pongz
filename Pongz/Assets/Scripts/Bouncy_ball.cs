@@ -30,7 +30,7 @@ public class Bouncy_ball : NetworkBehaviour
         }
         if (!hasAuthority)
         {
-            RpcUpdatePos(rb.position, rb.velocity);
+            //RpcUpdatePos(rb.position, rb.velocity);
         }
         CmdUpdatePos(rb.position, rb.velocity);
     }

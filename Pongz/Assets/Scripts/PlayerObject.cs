@@ -9,30 +9,29 @@ public class PlayerObject : NetworkBehaviour
     public GameObject playerPrefab;
     public Transform spawnPos1;
     public Transform spawnPos2;
+    GameObject playerObject;
 
     private void Start()
     {
-        if (!isLocalPlayer)
+        if (isServer)
         {
-            return;
+            SpawnPlayer();
         }
-        CmdSpawnPlayer();
     }
 
-    [Command]
-    void CmdSpawnPlayer()
+    void SpawnPlayer()
     {
         Debug.Log("CmdSpawnPlayer" + NetworkServer.connections.Count);
-        GameObject go = Instantiate(playerPrefab);
+        playerObject = Instantiate(playerPrefab);
         if (NetworkServer.connections.Count == 1)
         {
-            go.transform.position = spawnPos1.position;
-            NetworkServer.SpawnWithClientAuthority(go, connectionToClient);
+            playerObject.transform.position = spawnPos1.position;
         }
         else
         {
-            go.transform.position = spawnPos2.position;
-            NetworkServer.SpawnWithClientAuthority(go, connectionToClient);
+            playerObject.transform.position = spawnPos2.position;
         }
+        NetworkServer.SpawnWithClientAuthority(playerObject, connectionToClient);
+
     }
 }
