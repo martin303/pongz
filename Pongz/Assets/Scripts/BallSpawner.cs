@@ -8,12 +8,30 @@ public class BallSpawner : NetworkBehaviour
 
 
     public GameObject ballPrefab;
+    public Transform ballSpawnPos;
+
     GameObject instance;
 
 
-    public override void OnStartServer()
+    private void Start()
     {
-        instance = Instantiate(ballPrefab);
-        NetworkServer.Spawn(instance);
+        
+            Debug.LogError("Authority Spawning ball");
+
+        CmdSpawnBall();
+            
+
+        
     }
+
+   [Command]
+   public void CmdSpawnBall()
+    {
+        instance = Instantiate(ballPrefab, ballSpawnPos);
+        NetworkServer.Spawn(instance);
+        Debug.LogError("Server Spawning ball complete");
+    }
+    
+       
+    
 }

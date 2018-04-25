@@ -11,29 +11,79 @@ public class Bouncy_ball : NetworkBehaviour
     private Rigidbody2D rb;
     AudioSource audio;
 
+    [SyncVar]
+    Vector2 Velocity;
+    [SyncVar]
+    Vector3 Pos;
+    Vector3 SeverRefPos;
 
-    void Start()
+    private void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
-        rb.AddForce(transform.up * thrust);
-        rb.AddForce(transform.right * thrust);
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        if (hasAuthority)
+        {
+            Debug.Log("hasAuthority updating ball");
+            rb.AddForce(transform.up * thrust);
+            rb.AddForce(transform.right * thrust);
+        }
+        if(!hasAuthority)
+        {
+            Debug.Log("!hasAuthority updating ball");
+            rb.AddForce(transform.up * thrust);
+            rb.AddForce(transform.right * thrust);
+        }
+        if(isServer)
+        {
+            Debug.Log("isServer updating ball");
+            rb.AddForce(transform.up * thrust);
+            rb.AddForce(transform.right * thrust);
+        }
     }
-
-
     void Update()
     {
-        //check if x speed is to low and double
-
-        if (rb.velocity.x <= 4 && rb.velocity.x >= -4)
+        if (isServer)
         {
-            rb.velocity = new Vector2(rb.velocity.x * 2, rb.velocity.y);
+            Debug.Log("Server updating ball");
+            rb = GetComponent<Rigidbody2D>();
+            if (rb.velocity.x <= 4 && rb.velocity.x >= -4)
+            {
+                rb.velocity = new Vector2(rb.velocity.x * 2, rb.velocity.y);
+            }
+            RpcUpdatePos(rb.position, rb.velocity);
         }
         if (!hasAuthority)
         {
-            //RpcUpdatePos(rb.position, rb.velocity);
+            Debug.Log("Clien with !authority updateing bouncy_ball");
+            rb = GetComponent<Rigidbody2D>();
+            if (rb.velocity.x <= 4 && rb.velocity.x >= -4)
+            {
+                rb.velocity = new Vector2(rb.velocity.x * 2, rb.velocity.y);
+            }
+            CmdUpdatePos(transform.position, rb.velocity);
         }
-        CmdUpdatePos(rb.position, rb.velocity);
+        else if(!hasAuthority && !isServer)
+        {
+            Debug.Log("Client without authority updating ball");
+            GetComponent<Rigidbody2D>().velocity = Velocity;
+            transform.position = Vector3.SmoothDamp(transform.position, Pos, ref SeverRefPos, 0.25f);
+        }
     }
+
+
+    //void Update()
+    //{
+        //check if x speed is to low and double
+
+        //if (rb.velocity.x <= 4 && rb.velocity.x >= -4)
+        //{
+        //    rb.velocity = new Vector2(rb.velocity.x * 2, rb.velocity.y);
+        //}
+        //if (!hasAuthority)
+        //{
+        //RpcUpdatePos(rb.position, rb.velocity);
+        //}
+        //CmdUpdatePos(rb.position, rb.velocity);
+    //}
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -47,21 +97,17 @@ public class Bouncy_ball : NetworkBehaviour
     [Command]
     void CmdUpdatePos(Vector3 pos, Vector3 velocity)
     {
-        rb = GetComponent<Rigidbody2D>();
-        rb.velocity = (velocity);
-        gameObject.transform.position = pos;
+        Debug.Log("CMDUpdatepos ball");
+        Pos = pos;
+        Velocity = velocity;
     }
 
     [ClientRpc]
     void RpcUpdatePos(Vector3 pos, Vector3 velocity)
     {
-        if (!hasAuthority)
-        {
-        rb = GetComponent<Rigidbody2D>();
-        rb.velocity = (velocity);
-        gameObject.transform.position = pos;
-        }   
-
+        Debug.Log("RPCUpdatepos ball");
+        Pos = pos;
+        Velocity = velocity;
     }
 
 

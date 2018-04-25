@@ -5,7 +5,8 @@ using UnityEngine.Networking;
 
 public class PlayerOneController : NetworkBehaviour {
 
-
+    public GameObject Ball;
+    public Transform BallSpawnPoint;
     public float speed = 10f;
     static public PlayerOneController LocalPlayerObject { get; protected set; }
 
@@ -19,7 +20,6 @@ public class PlayerOneController : NetworkBehaviour {
         if (isServer)
         {
         }
-
         if (hasAuthority)
         {
             LocalPlayerObject = this;
@@ -29,12 +29,6 @@ public class PlayerOneController : NetworkBehaviour {
         {
             transform.position = Vector3.SmoothDamp(transform.position, serverPosition, ref serverPositionSmoothVelocity, 0.25f);
         }
-
-
-
-
-
-
 
         //if (!hasAuthority)
         //{
@@ -58,6 +52,13 @@ public class PlayerOneController : NetworkBehaviour {
 
         // Do we manually tell the network where we moved?
         CmdUpdatePosition(transform.position);
+
+        if (Input.GetKeyUp(KeyCode.Space) && NetworkServer.connections.Count <= 1)
+        {
+            //GameObject ball = Instantiate(Ball, BallSpawnPoint);
+            //ball.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
+            //NetworkServer.Spawn(ball);            
+        }
     }
 
     [Command]
