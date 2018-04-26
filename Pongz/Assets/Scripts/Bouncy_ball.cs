@@ -7,8 +7,11 @@ using UnityEngine.UI;
 
 public class Bouncy_ball : NetworkBehaviour
 {
-    float thrust = 500;
+    float thrust = 100;
     private Rigidbody2D rb;
+    private float constantSpeed;
+    private float imposs;
+
 
     [SyncVar]
     Vector2 Velocity;
@@ -18,16 +21,8 @@ public class Bouncy_ball : NetworkBehaviour
 
     private void Start()
     {
+        constantSpeed = 10f;
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        if (hasAuthority)
-        {
-            rb.AddForce(transform.up * thrust);
-            rb.AddForce(transform.right * thrust);
-        }
-        if(!hasAuthority)
-        {   rb.AddForce(transform.up * thrust);
-            rb.AddForce(transform.right * thrust);
-        }
         if (isServer)
         {
             rb.AddForce(transform.up * thrust);
@@ -39,11 +34,7 @@ public class Bouncy_ball : NetworkBehaviour
         if (isServer)
         {
             rb = GetComponent<Rigidbody2D>();
-            if (IsBallSpeedTooSlow())
-            {
-                Debug.Log("Ball to slow");
-                rb.velocity = new Vector2(rb.velocity.x * 2, rb.velocity.y);
-            }
+            UpdateBallSpeed();
             RpcUpdatePos(rb.position, rb.velocity);
         }
         else
@@ -54,9 +45,22 @@ public class Bouncy_ball : NetworkBehaviour
         }
     }
 
-    Boolean IsBallSpeedTooSlow()
+    void UpdateBallSpeed()
     {
-        return (rb.velocity.x <= 4 && rb.velocity.x >= -4);
+        Debug.Log("Ball to slow");
+//        if(rb.velocity.x >= 8 || rb.velocity.x >= -8 || rb.velocity.y >= 8 || rb.velocity.y )
+       rb.velocity = rb.velocity.normalized * constantSpeed;
+       
+        if(rb.velocity.y == 0)
+        {
+            Debug.Log("Y == 0, update velocity");
+            rb.velocity = new Vector2(rb.velocity.x ,1) * 2;
+        }
+        if (rb.velocity.x == 0)
+        {
+            Debug.Log("X == 0, update velocity");
+            rb.velocity = new Vector2(1, rb.velocity.y) * 2;
+        }
     }
 
 
