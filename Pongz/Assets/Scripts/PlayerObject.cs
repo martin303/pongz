@@ -5,33 +5,45 @@ using UnityEngine.Networking;
 
 public class PlayerObject : NetworkBehaviour
 {
-
+    public GameObject ballPrefab;
     public GameObject playerPrefab;
     public Transform spawnPos1;
     public Transform spawnPos2;
-    GameObject playerObject;
+    GameObject Object;
 
     private void Start()
     {
         if (isServer)
         {
             SpawnPlayer();
+            if (!GameObject.Find("Ball(Clone)"))
+            {
+                SpawnBall();
+            }
         }
     }
 
     void SpawnPlayer()
     {
         Debug.Log("CmdSpawnPlayer" + NetworkServer.connections.Count);
-        playerObject = Instantiate(playerPrefab);
+        Object = Instantiate(playerPrefab);
         if (NetworkServer.connections.Count == 1)
         {
-            playerObject.transform.position = spawnPos1.position;
+            Object.transform.position = spawnPos1.position;
         }
         else
         {
-            playerObject.transform.position = spawnPos2.position;
+            Object.transform.position = spawnPos2.position;
         }
-        NetworkServer.SpawnWithClientAuthority(playerObject, connectionToClient);
-
+        NetworkServer.SpawnWithClientAuthority(Object, connectionToClient);
     }
+
+    void SpawnBall()
+    {
+        Debug.Log("CmdSpawnBall" + NetworkServer.connections.Count);
+        Object = Instantiate(ballPrefab);
+            Object.transform.position = new Vector3(0, 0, 10);
+            NetworkServer.SpawnWithClientAuthority(Object, connectionToServer);
+    }
+
 }

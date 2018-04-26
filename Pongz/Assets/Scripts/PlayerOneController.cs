@@ -53,12 +53,11 @@ public class PlayerOneController : NetworkBehaviour {
         // Do we manually tell the network where we moved?
         CmdUpdatePosition(transform.position);
 
-        if (Input.GetKeyUp(KeyCode.Space) && NetworkServer.connections.Count <= 1)
-        {
-            //GameObject ball = Instantiate(Ball, BallSpawnPoint);
-            //ball.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
-            //NetworkServer.Spawn(ball);            
-        }
+        //if (Input.GetKeyUp(KeyCode.Space) && NetworkServer.connections.Count <= 1)
+        //{
+        //    GameObject ball = Instantiate(Ball, BallSpawnPoint);
+        //    NetworkServer.SpawnWithClientAuthority(ball,connectionToClient);
+        //}
     }
 
     [Command]

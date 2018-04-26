@@ -29,10 +29,12 @@ public class Bouncy_ball : NetworkBehaviour
         if(!hasAuthority)
         {
             Debug.Log("!hasAuthority updating ball");
+            Debug.Log("Vel before " + rb.velocity);
             rb.AddForce(transform.up * thrust);
             rb.AddForce(transform.right * thrust);
+            Debug.Log("Vel after " + rb.velocity);
         }
-        if(isServer)
+        if (isServer)
         {
             Debug.Log("isServer updating ball");
             rb.AddForce(transform.up * thrust);
@@ -47,25 +49,30 @@ public class Bouncy_ball : NetworkBehaviour
             rb = GetComponent<Rigidbody2D>();
             if (rb.velocity.x <= 4 && rb.velocity.x >= -4)
             {
+                Debug.Log("Vel before " + rb.velocity);
                 rb.velocity = new Vector2(rb.velocity.x * 2, rb.velocity.y);
+                Debug.Log("Vel after " + rb.velocity);
             }
             RpcUpdatePos(rb.position, rb.velocity);
         }
-        if (!hasAuthority)
+        if (hasAuthority)
         {
-            Debug.Log("Clien with !authority updateing bouncy_ball");
+            Debug.Log("Clien with authority updateing bouncy_ball");
             rb = GetComponent<Rigidbody2D>();
             if (rb.velocity.x <= 4 && rb.velocity.x >= -4)
             {
+                Debug.Log("Vel before " + rb.velocity);
                 rb.velocity = new Vector2(rb.velocity.x * 2, rb.velocity.y);
+                Debug.Log("Vel after " + rb.velocity);
             }
-            CmdUpdatePos(transform.position, rb.velocity);
+            CmdUpdatePos(rb.position, rb.velocity);
         }
-        else if(!hasAuthority && !isServer)
+        else if (!hasAuthority && !isServer)
         {
             Debug.Log("Client without authority updating ball");
-            GetComponent<Rigidbody2D>().velocity = Velocity;
-            transform.position = Vector3.SmoothDamp(transform.position, Pos, ref SeverRefPos, 0.25f);
+            rb = GetComponent<Rigidbody2D>();
+            rb.velocity = Velocity;
+            rb.position = Vector3.SmoothDamp(rb.position, Pos, ref SeverRefPos, 0.25f);
         }
     }
 
