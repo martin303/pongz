@@ -5,8 +5,6 @@ using UnityEngine.Networking;
 
 public class PlayerOneController : NetworkBehaviour {
 
-    public GameObject Ball;
-    public Transform BallSpawnPoint;
     public float speed = 10f;
     static public PlayerOneController LocalPlayerObject { get; protected set; }
 
@@ -29,15 +27,6 @@ public class PlayerOneController : NetworkBehaviour {
         {
             transform.position = Vector3.SmoothDamp(transform.position, serverPosition, ref serverPositionSmoothVelocity, 0.25f);
         }
-
-        //if (!hasAuthority)
-        //{
-        //    return;
-        //}
-        //var y = Input.GetAxis("Vertical") * Time.deltaTime * speed;
-        //transform.Translate(0, y, 0);
-
-
     }
 
     void AuthorityUpdate()
@@ -53,22 +42,12 @@ public class PlayerOneController : NetworkBehaviour {
         // Do we manually tell the network where we moved?
         CmdUpdatePosition(transform.position);
 
-        //if (Input.GetKeyUp(KeyCode.Space) && NetworkServer.connections.Count <= 1)
-        //{
-        //    GameObject ball = Instantiate(Ball, BallSpawnPoint);
-        //    NetworkServer.SpawnWithClientAuthority(ball,connectionToClient);
-        //}
+        
     }
 
     [Command]
     void CmdUpdatePosition(Vector3 newPosition)
     {
-        // TODO: Check to make sure this move is totally legal,
-        // both in term of landscape and movement remaining
-        // and finally (and most importantly) the TURN PHASE
-        // If an illegal move is spotted, do something like:
-        //      RpcFixPosition( serverPosition )
-        // and return
         serverPosition = newPosition;
     }
 }

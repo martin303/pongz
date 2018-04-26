@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114895693407447838}
   - component: {fileID: 114008398603823274}
   m_Layer: 0
-  m_Name: PlayerOne
+  m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,9 +111,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 509b39e6011089f489c32cd562a51969, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ball: {fileID: 1512693758963836, guid: 03b61d2cac1ca6f44a36a9fcfb7bc143, type: 2}
-  BallSpawnPoint: {fileID: 4011358368345888, guid: f0d30e6b69ebf48459fa5662c5c49fb9,
-    type: 2}
   speed: 10
 --- !u!212 &212729771227647290
 SpriteRenderer:

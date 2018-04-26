@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -7,14 +8,20 @@ public class PlayerObject : NetworkBehaviour
 {
     public GameObject ballPrefab;
     public GameObject playerPrefab;
+    public GameObject mapPrefab;
     public Transform spawnPos1;
     public Transform spawnPos2;
-    GameObject Object;
+    GameObject Player;
+    GameObject Map;
+    GameObject Ball;
+
 
     private void Start()
     {
         if (isServer)
         {
+            SpawnMap();
+
             SpawnPlayer();
             if (!GameObject.Find("Ball(Clone)"))
             {
@@ -23,27 +30,31 @@ public class PlayerObject : NetworkBehaviour
         }
     }
 
+    private void SpawnMap()
+    {
+        Map = Instantiate(mapPrefab);
+        NetworkServer.Spawn(Map);
+    }
+
     void SpawnPlayer()
     {
-        Debug.Log("CmdSpawnPlayer" + NetworkServer.connections.Count);
-        Object = Instantiate(playerPrefab);
+        Player = Instantiate(playerPrefab);
         if (NetworkServer.connections.Count == 1)
         {
-            Object.transform.position = spawnPos1.position;
+            Player.transform.position = spawnPos1.position;
         }
         else
         {
-            Object.transform.position = spawnPos2.position;
+            Player.transform.position = spawnPos2.position;
         }
-        NetworkServer.SpawnWithClientAuthority(Object, connectionToClient);
+        NetworkServer.SpawnWithClientAuthority(Player, connectionToClient);
     }
 
     void SpawnBall()
     {
-        Debug.Log("CmdSpawnBall" + NetworkServer.connections.Count);
-        Object = Instantiate(ballPrefab);
-        Object.transform.position = new Vector3(0, 0, 10);
-        NetworkServer.Spawn(Object);
+        Ball = Instantiate(ballPrefab);
+        Ball.transform.position = new Vector3(0, 0, 10);
+        NetworkServer.Spawn(Ball);
     }
 
 }
