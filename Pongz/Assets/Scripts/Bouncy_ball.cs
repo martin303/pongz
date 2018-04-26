@@ -9,7 +9,6 @@ public class Bouncy_ball : NetworkBehaviour
 {
     float thrust = 500;
     private Rigidbody2D rb;
-    AudioSource audio;
 
     [SyncVar]
     Vector2 Velocity;
@@ -94,9 +93,9 @@ public class Bouncy_ball : NetworkBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name == "PlayerOne" || collision.gameObject.name == "PlayerTwo")
+        if (collision.gameObject.name == "PlayerOne(Clone)")
         {
-            audio = gameObject.GetComponent<AudioSource>();
+            AudioSource audio = GetComponent<AudioSource>();
             audio.Play();
         }
     }

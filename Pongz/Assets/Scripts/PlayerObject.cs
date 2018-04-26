@@ -42,8 +42,8 @@ public class PlayerObject : NetworkBehaviour
     {
         Debug.Log("CmdSpawnBall" + NetworkServer.connections.Count);
         Object = Instantiate(ballPrefab);
-            Object.transform.position = new Vector3(0, 0, 10);
-            NetworkServer.SpawnWithClientAuthority(Object, connectionToServer);
+        Object.transform.position = new Vector3(0, 0, 10);
+        NetworkServer.Spawn(Object);
     }
 
 }
