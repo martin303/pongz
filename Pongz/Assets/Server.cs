@@ -9,7 +9,6 @@ public class Server : NetworkBehaviour {
 
     public override void OnStartServer()
     {
-        Debug.Log("Server: On start server");
         SpawnMap();
     }
 

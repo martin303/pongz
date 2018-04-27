@@ -51,33 +51,13 @@ public class Bouncy_ball : NetworkBehaviour
         rb.velocity = rb.velocity.normalized * constantSpeed;
         if(rb.velocity.y == 0)
         {
-            Debug.Log("Y == 0, update velocity");
             rb.velocity = new Vector2(rb.velocity.x ,oldVelocity.y);
         }
         if (rb.velocity.x == 0)
         {
-            Debug.Log("X == 0, update velocity");
             rb.velocity = new Vector2(oldVelocity.x, rb.velocity.y);
         }
     }
-
-
-
-
-    //void Update()
-    //{
-        //check if x speed is to low and double
-
-        //if (rb.velocity.x <= 4 && rb.velocity.x >= -4)
-        //{
-        //    rb.velocity = new Vector2(rb.velocity.x * 2, rb.velocity.y);
-        //}
-        //if (!hasAuthority)
-        //{
-        //RpcUpdatePos(rb.position, rb.velocity);
-        //}
-        //CmdUpdatePos(rb.position, rb.velocity);
-    //}
 
     private void OnCollisionEnter2D(Collision2D collision)
     {

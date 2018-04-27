@@ -21,6 +21,5 @@ public class Trigger_right_side : NetworkBehaviour {
     public void UpdateScoreP2(int score)
     {
         playerTwoScoreText.text = score.ToString();
-        Debug.Log("UpdateScore player 2 hook");
     }
 }

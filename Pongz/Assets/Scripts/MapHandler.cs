@@ -3,28 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class MapHandler : NetworkBehaviour {
-    private int playerCount = 0;
+public class MapHandler : NetworkBehaviour
+{
+    EdgeCollider2D map;
+    public List<Vector2> hexagonPoints = new List<Vector2>();
 
     void Start()
-    {   // Use this for initialization
-        //void Update () {
-        //    EdgeCollider2D ec = GetComponent<EdgeCollider2D>();
-        //    float height = 2f * Camera.main.orthographicSize;
-        //    float width = height * Camera.main.aspect;
-        //    float scalex = width;
-        //    Debug.Log("widht: " + width);
-        //    Debug.Log("height: " + height);
-        //    // GetComponent<EdgeCollider2D>().bounds.size.x = width;
-        //    float collideryScale = ec.bounds.size.y;
-        //    float colliderxScale = ec.bounds.size.x;
-        //    Debug.Log("collideryScale: " + collideryScale);
-        //    Debug.Log("colliderxScale: " + colliderxScale);
-        //    ec.transform.localScale  = new Vector3(scalex, height, 0);
+    {
+        map = GetComponent<EdgeCollider2D>();
+        float mapWidth = map.bounds.size.x;
+        float mapHeight = map.bounds.size.y;
+        float cameraHeight = Camera.main.orthographicSize * 2.0f;
+        float cameraWidth = cameraHeight * AspectUtility.screenWidth / AspectUtility.screenHeight;
 
-        //    // new Vector3(camera.orthographicSize * 2 * camera.aspect, camera.orthographicSize * 2);
+        if (NetworkServer.connections.Count <= 2)
+        {
+            transform.localScale = Vector3.one;
+            transform.localScale = new Vector3(cameraWidth / mapWidth, cameraHeight / mapHeight, 1f);
+        }
+        else if (NetworkServer.connections.Count > 2 && NetworkServer.connections.Count >= 4)
+        {
+            hexagonPoints.Add(new Vector2(cameraWidth/4, -cameraHeight/2));
+            hexagonPoints.Add(new Vector2(cameraWidth/2, 0));
+            hexagonPoints.Add(new Vector2(cameraWidth/4, cameraHeight/2));
+            hexagonPoints.Add(new Vector2(-cameraWidth/4, cameraHeight / 2));
+            hexagonPoints.Add(new Vector2(-cameraWidth/2, 0));
+            hexagonPoints.Add(new Vector2(-cameraWidth/4, -cameraHeight/2));
+            hexagonPoints.Add(new Vector2(cameraWidth / 4, -cameraHeight / 2));
 
-        //}
+            map.points = hexagonPoints.ToArray();
+        }
     }
 }
 

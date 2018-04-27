@@ -15,10 +15,6 @@ public class OnPlayerConnect : NetworkBehaviour
     GameObject Ball;
     GameObject ScoreBoard;
 
-    public override void OnStartServer()
-    {
-        Debug.Log("ServerSTART");
-    }
     private void Start()
     {
         if (isServer)
@@ -28,8 +24,6 @@ public class OnPlayerConnect : NetworkBehaviour
             {
                 SpawnBall();
             }
-            //GameObject networking = GameObject.Find("Networking");
-            //networking.GetComponent<NetworkManager>().ServerChangeScene("Offline");
         }
     }
     void SpawnPlayer()
