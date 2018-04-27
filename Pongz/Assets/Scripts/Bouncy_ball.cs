@@ -10,6 +10,7 @@ public class Bouncy_ball : NetworkBehaviour
     float thrust = 100;
     private Rigidbody2D rb;
     private float constantSpeed;
+    private Vector2 oldVelocity;
     private float imposs;
 
 
@@ -47,19 +48,16 @@ public class Bouncy_ball : NetworkBehaviour
 
     void UpdateBallSpeed()
     {
-        Debug.Log("Ball to slow");
-//        if(rb.velocity.x >= 8 || rb.velocity.x >= -8 || rb.velocity.y >= 8 || rb.velocity.y )
-       rb.velocity = rb.velocity.normalized * constantSpeed;
-       
+        rb.velocity = rb.velocity.normalized * constantSpeed;
         if(rb.velocity.y == 0)
         {
             Debug.Log("Y == 0, update velocity");
-            rb.velocity = new Vector2(rb.velocity.x ,1) * 2;
+            rb.velocity = new Vector2(rb.velocity.x ,oldVelocity.y);
         }
         if (rb.velocity.x == 0)
         {
             Debug.Log("X == 0, update velocity");
-            rb.velocity = new Vector2(1, rb.velocity.y) * 2;
+            rb.velocity = new Vector2(oldVelocity.x, rb.velocity.y);
         }
     }
 
@@ -83,6 +81,7 @@ public class Bouncy_ball : NetworkBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        oldVelocity = collision.relativeVelocity;
         if (collision.gameObject.name == "Player(Clone)")
         {
             AudioSource audio = GetComponent<AudioSource>();

@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class PlayerOneController : NetworkBehaviour {
+public class PlayerController : NetworkBehaviour {
 
     public float speed = 10f;
-    static public PlayerOneController LocalPlayerObject { get; protected set; }
 
     [SyncVar]
     Vector3 serverPosition;
@@ -20,7 +19,6 @@ public class PlayerOneController : NetworkBehaviour {
         }
         if (hasAuthority)
         {
-            LocalPlayerObject = this;
             AuthorityUpdate();
         }
         else

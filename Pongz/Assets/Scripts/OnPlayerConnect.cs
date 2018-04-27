@@ -4,37 +4,36 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class PlayerObject : NetworkBehaviour
+public class OnPlayerConnect : NetworkBehaviour
 {
     public GameObject ballPrefab;
     public GameObject playerPrefab;
-    public GameObject mapPrefab;
     public Transform spawnPos1;
     public Transform spawnPos2;
     GameObject Player;
-    GameObject Map;
     GameObject Ball;
 
+
+    public override void OnStartServer()
+    {
+        Debug.Log("ServerSTART");
+    }
 
     private void Start()
     {
         if (isServer)
         {
-            SpawnMap();
-
             SpawnPlayer();
             if (!GameObject.Find("Ball(Clone)"))
             {
                 SpawnBall();
             }
+            //GameObject networking = GameObject.Find("Networking");
+            //networking.GetComponent<NetworkManager>().ServerChangeScene("Offline");
         }
     }
 
-    private void SpawnMap()
-    {
-        Map = Instantiate(mapPrefab);
-        NetworkServer.Spawn(Map);
-    }
+    
 
     void SpawnPlayer()
     {
