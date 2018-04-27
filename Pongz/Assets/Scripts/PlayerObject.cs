@@ -7,6 +7,7 @@ using UnityEngine.Networking;
 public class PlayerObject : NetworkBehaviour
 {
     public GameObject ballPrefab;
+    public GameObject scoreBoardPrefab;
     public GameObject playerPrefab;
     public GameObject mapPrefab;
     public Transform spawnPos1;
@@ -14,6 +15,7 @@ public class PlayerObject : NetworkBehaviour
     GameObject Player;
     GameObject Map;
     GameObject Ball;
+    GameObject ScoreBoard;
 
 
     private void Start()
@@ -21,13 +23,19 @@ public class PlayerObject : NetworkBehaviour
         if (isServer)
         {
             SpawnMap();
-
+            SpawnScoreBoard();
             SpawnPlayer();
             if (!GameObject.Find("Ball(Clone)"))
             {
                 SpawnBall();
             }
         }
+    }
+
+    private void SpawnScoreBoard()
+    {
+        ScoreBoard = Instantiate(scoreBoardPrefab);
+        NetworkServer.Spawn(ScoreBoard);
     }
 
     private void SpawnMap()
