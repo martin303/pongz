@@ -29,11 +29,12 @@ public class OnPlayerConnect : NetworkBehaviour
     void SpawnPlayer()
     {
         Player = Instantiate(playerPrefab);
-        if (NetworkServer.connections.Count == 1)
+        
+        if (GameObject.FindGameObjectsWithTag("Player").Length == 1)
         {
             Player.transform.position = spawnPos1.position;
         }
-        else
+        else 
         {
             Player.transform.position = spawnPos2.position;
         }
