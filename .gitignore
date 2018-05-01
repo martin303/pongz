@@ -4,7 +4,7 @@ Pongz/[Oo]bj/
 Pongz/[Bb]uild/
 Pongz/[Bb]uilds/
 Pongz/Assets/AssetStoreTools*
-
+Pongz/.bashrc
 
 # Visual Studio 2015 cache directory
 Pongz/.vs/
@@ -29,6 +29,7 @@ Pongz/ExportedObj/
 
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
+
 
 # Builds
 *.apk
