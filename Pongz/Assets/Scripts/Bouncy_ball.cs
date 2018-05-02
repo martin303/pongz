@@ -9,10 +9,8 @@ public class Bouncy_ball : NetworkBehaviour
 {
     float thrust = 100;
     private Rigidbody2D rb;
-    private float constantSpeed;
+    public float constantSpeed;
     private Vector2 oldVelocity;
-    private float imposs;
-
 
     [SyncVar]
     Vector2 Velocity;
@@ -22,7 +20,7 @@ public class Bouncy_ball : NetworkBehaviour
 
     private void Start()
     {
-        constantSpeed = 10f;
+        constantSpeed = 20f;
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         if (isServer)
         {
