@@ -11,6 +11,7 @@ public class PlayerController : NetworkBehaviour
     [SyncVar]
     Vector3 serverPosition;
     Vector3 serverPositionSmoothVelocity;
+    
 
     void Start()
     {
