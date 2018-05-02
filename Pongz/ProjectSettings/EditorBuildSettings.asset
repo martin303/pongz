@@ -9,5 +9,8 @@ EditorBuildSettings:
     path: Assets/Scenes/StartScene.unity
     guid: f149d2d86dd6ac54fa3b9fc11a4e0b0b
   - enabled: 1
-    path: Assets/Scenes/Offline.unity
+    path: Assets/Scenes/2player.unity
     guid: 7b14c1643382bd54a965a047ab4c6d00
+  - enabled: 1
+    path: Assets/Scenes/TestScene.unity
+    guid: 6458ef5d7accae84db6041551063526b
