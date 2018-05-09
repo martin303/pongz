@@ -299,15 +299,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1537003856}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4ce5599e9d54134891873c07feb267c, type: 3}
+  m_Script: {fileID: 11500000, guid: 39098d0943fcd36408fa898bebc27c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SyncVarDirtyBits: 0
-  m_LastSendTime: 0
-  m_SyncVarGuard: 0
-  m_MyView: {fileID: 0}
-  mapPrefab: {fileID: 1509219459468230, guid: b91ba293be0e5884e8598c7f8d73e183, type: 2}
-  Map: {fileID: 0}
+  playerSidePrefab: {fileID: 1453955583370346, guid: 6884c34fb8d3b71498798c94317ac38d,
+    type: 2}
 --- !u!4 &1537003858
 Transform:
   m_ObjectHideFlags: 0
@@ -315,7 +311,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1537003856}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.95815206, y: 0.16025461, z: 0.0859375}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
