@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1927094535451040}
+  m_IsPrefabParent: 1
+--- !u!1 &1927094535451040
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4469404870654144}
+  - component: {fileID: 114775033201760028}
+  - component: {fileID: 114489033007995938}
+  m_Layer: 0
+  m_Name: NetworkPlayerPrefab
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4469404870654144
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1927094535451040}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114489033007995938
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1927094535451040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 211
+    i1: 199
+    i2: 193
+    i3: 57
+    i4: 245
+    i5: 79
+    i6: 129
+    i7: 244
+    i8: 8
+    i9: 121
+    i10: 95
+    i11: 30
+    i12: 13
+    i13: 208
+    i14: 115
+    i15: 146
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
+--- !u!114 &114775033201760028
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1927094535451040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d71f7a3559fe2445b2dabd3e1ef2031, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballPrefab: {fileID: 1201857815521410, guid: 03b61d2cac1ca6f44a36a9fcfb7bc143, type: 2}
+  scoreBoardPrefab: {fileID: 1759239915121582, guid: 82f0007c0a554c143a7e82b2e7e25676,
+    type: 2}
+  playerPrefab: {fileID: 1305832283990252, guid: cefd07bd3f8a57949bd7c0f9e399c787,
+    type: 2}
+  spawnPos1: {fileID: 4754816386468290, guid: c7ee474c04fe13347b15df77de82325e, type: 2}
+  spawnPos2: {fileID: 4862341354148102, guid: 4b0c66f1f11f9064497c1693fe310451, type: 2}

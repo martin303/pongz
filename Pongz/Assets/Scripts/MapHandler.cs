@@ -15,14 +15,16 @@ public class MapHandler : NetworkBehaviour
         float mapHeight = map.bounds.size.y;
         float cameraHeight = Camera.main.orthographicSize * 2.0f;
         float cameraWidth = cameraHeight * AspectUtility.screenWidth / AspectUtility.screenHeight;
-
+        Debug.Log("try");
         if (NetworkServer.connections.Count <= 2)
         {
+            Debug.Log("first");
             transform.localScale = Vector3.one;
             transform.localScale = new Vector3(cameraWidth / mapWidth, cameraHeight / mapHeight, 1f);
         }
         else if (NetworkServer.connections.Count > 2 && NetworkServer.connections.Count >= 4)
         {
+            Debug.Log("second");
             hexagonPoints.Add(new Vector2(cameraWidth/4, -cameraHeight/2));
             hexagonPoints.Add(new Vector2(cameraWidth/2, 0));
             hexagonPoints.Add(new Vector2(cameraWidth/4, cameraHeight/2));

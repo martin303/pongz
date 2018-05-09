@@ -7,7 +7,6 @@ using UnityEngine.Networking;
 public class OnPlayerConnect : NetworkBehaviour
 {
     public GameObject ballPrefab;
-    public GameObject scoreBoardPrefab;
     public GameObject playerPrefab;
     public Transform spawnPos1;
     public Transform spawnPos2;
@@ -30,7 +29,7 @@ public class OnPlayerConnect : NetworkBehaviour
     {
         Player = Instantiate(playerPrefab);
         
-        if (GameObject.FindGameObjectsWithTag("Player").Length == 1)
+        if (GameObject.FindGameObjectsWithTag("Player").Length == 1) 
         {
             Player.transform.position = spawnPos1.position;
         }
