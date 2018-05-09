@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ThreePlayerMap : MonoBehaviour
+public class Map : MonoBehaviour
 {
     public GameObject playerSidePrefab;
 
@@ -43,23 +43,5 @@ public class ThreePlayerMap : MonoBehaviour
         pos.y = center.y + radius * Mathf.Cos(ang * Mathf.Deg2Rad);
         pos.z = center.z;
         return pos;
-    }
-    private void BuildMap()
-    {
-        List<Vector2> hexagonPoints = new List<Vector2>();
-        float cameraHeight = Camera.main.orthographicSize * 2;
-        float s = cameraHeight / 2;
-        float r = Mathf.Sqrt(3) / 2 * s;
-
-        hexagonPoints.Add(new Vector2(0, -s));
-        hexagonPoints.Add(new Vector2(r, -s / 2));
-        hexagonPoints.Add(new Vector2(r, s / 2));
-        hexagonPoints.Add(new Vector2(0, s));
-        hexagonPoints.Add(new Vector2(-r, s / 2));
-        hexagonPoints.Add(new Vector2(-r, -s / 2));
-        hexagonPoints.Add(new Vector2(0, -s));
-
-        EdgeCollider2D map = GetComponent<EdgeCollider2D>();
-        map.points = hexagonPoints.ToArray();
     }
 }

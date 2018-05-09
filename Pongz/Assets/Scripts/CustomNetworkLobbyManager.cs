@@ -14,5 +14,5 @@ public class CustomNetworkLobbyManager : NetworkLobbyManager {
 	void Update () {
 		
 	}
-    
+
 }

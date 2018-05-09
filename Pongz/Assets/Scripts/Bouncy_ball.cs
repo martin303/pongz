@@ -80,9 +80,5 @@ public class Bouncy_ball : NetworkBehaviour
         Pos = pos;
         Velocity = velocity;
     }
-
-
-
-
 }
 

@@ -20,8 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4912931078346852}
   - component: {fileID: 68941819112070114}
-  - component: {fileID: 114965911326276706}
   - component: {fileID: 114737819177275820}
+  - component: {fileID: 114088532563674212}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -64,6 +64,20 @@ EdgeCollider2D:
   - {x: 8.5545, y: -5}
   - {x: 8.5545, y: -5}
   - {x: 8.5545, y: -5}
+  - {x: 8.5545, y: -5}
+--- !u!114 &114088532563674212
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1509219459468230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39098d0943fcd36408fa898bebc27c20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSidePrefab: {fileID: 1453955583370346, guid: 6884c34fb8d3b71498798c94317ac38d,
+    type: 2}
 --- !u!114 &114737819177275820
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -78,33 +92,21 @@ MonoBehaviour:
   m_SceneId:
     m_Value: 0
   m_AssetId:
-    i0: 205
-    i1: 210
-    i2: 206
-    i3: 55
-    i4: 223
-    i5: 5
-    i6: 24
-    i7: 36
-    i8: 248
-    i9: 215
-    i10: 208
-    i11: 206
-    i12: 46
-    i13: 113
-    i14: 18
-    i15: 170
+    i0: 185
+    i1: 27
+    i2: 162
+    i3: 147
+    i4: 190
+    i5: 14
+    i6: 88
+    i7: 132
+    i8: 232
+    i9: 89
+    i10: 140
+    i11: 127
+    i12: 141
+    i13: 115
+    i14: 225
+    i15: 131
   m_ServerOnly: 1
   m_LocalPlayerAuthority: 0
---- !u!114 &114965911326276706
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1509219459468230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 661f150f857fe5a428cc9854c55d18ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hexagonPoints: []
